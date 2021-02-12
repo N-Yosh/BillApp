@@ -20,28 +20,34 @@ class MyApp extends StatelessWidget {
         create: (context) => MainModel(),
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Top page'),
+            title: Text('Billing list'),
           ),
           body: Consumer<MainModel>(
             builder: (context, model, child) {
+              
+              final listTiles = model.bills
+                  .map(
+                    (e) => ListTile(
+                      leading: Text('￥' + e.money.toString()),
+                      title: Text(e.person),
+                      subtitle: Text('支払予定 ' + e.paymentDay.toString()),
+                    ),
+                  )
+                  .toList();
+
               return Container(
                 color: Colors.grey[300],
-                padding: const EdgeInsets.all(8.0),
-                constraints: BoxConstraints.expand(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '請求中リスト',
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
+                child: ListView(
+                  children: listTiles,
                 ),
               );
             },
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              //todo
+            },
+            child: Icon(Icons.add),
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
