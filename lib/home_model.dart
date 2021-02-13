@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'bill.dart';
 
-class MainModel extends ChangeNotifier{
+class HomeModel extends ChangeNotifier{
   List<Bill> bills =[];
 
 }

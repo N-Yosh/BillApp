@@ -1,21 +1,19 @@
 import 'dart:core';
 
 class Bill {
-  bill(String personName, double money, DateTime occurrenceDay,
-      DateTime paymentDay) {
-    this.person = personName;
-    this.money = money;
-    this.occurrenceDay = occurrenceDay;
-    this.paymentDay = paymentDay;
-    this.createdDay = DateTime.now();
+  //コンストラクタ
+  Bill(this.person,this.money){
+    createdDay=DateTime.now();
   }
 
+  //変数
   String person;
   double money;
   DateTime createdDay;
 
   DateTime occurrenceDay;
   DateTime paymentDay;
+  String memo;
 
   bool collectionCompleted = false;
   DateTime collectedDay;
