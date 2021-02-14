@@ -8,4 +8,9 @@ class BillListModel extends ChangeNotifier {
     bills.add(newBill);
     notifyListeners();
   }
+
+  void removeBill(Bill targetBill){
+    bills.remove(targetBill);
+    notifyListeners();
+  }
 }

@@ -12,10 +12,17 @@ class BillList extends StatelessWidget {
         builder: (context, model, child) {
           final listTiles = model.bills
               .map(
-                (e) => ListTile(
-                  leading: Text('￥' + e.money.toString(),style: TextStyle(fontSize: 30,),),
-                  title: Text(e.person),
-                  subtitle: Text('支払予定 ' + e.createdDay.toString()),
+                (e) => Container(
+                  padding: EdgeInsets.all(3),
+                  child: ListTile(
+                    tileColor: Colors.white,
+                    onLongPress: (){
+                      model.removeBill(e);
+                    },
+                    leading: Text('￥' + e.money.toString(),style: TextStyle(fontSize: 30,),),
+                    title: Text(e.person),
+                    subtitle: Text('支払予定 ' + e.createdDay.toString()),
+                  ),
                 ),
               )
               .toList();

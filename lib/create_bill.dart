@@ -1,13 +1,13 @@
-import 'package:bill_app/bill_list_model.dart';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'bill.dart';
 
 class CreateBill extends StatelessWidget {
   final _personTextController = TextEditingController();
   final _moneyTextController = TextEditingController();
+  final _memoTextController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CreateBill extends StatelessWidget {
         child: Container(
           color: Colors.white,
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 children: [
@@ -33,6 +33,7 @@ class CreateBill extends StatelessWidget {
                     child: TextFormField(
                       controller: _personTextController,
                       decoration: InputDecoration(labelText: '請求相手'),
+                      maxLength: 30,
                     ),
                   ),
                 ],
@@ -47,6 +48,7 @@ class CreateBill extends StatelessWidget {
                     child: TextFormField(
                       controller: _moneyTextController,
                       decoration: InputDecoration(labelText: '請求金額'),
+                      maxLength: 10,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly,
                       ],
@@ -71,6 +73,72 @@ class CreateBill extends StatelessWidget {
                   Navigator.of(context).pop(newBill);
                 },
               ),
+              Padding(
+                padding: EdgeInsets.only(top: 30),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 5)),
+                  Text(
+                    '詳細項目',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey[800],
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  Text('請求発生日 ：',style: TextStyle(fontSize: 20),),
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  FlatButton(
+                    child: Text("請求発生日",style: TextStyle(fontSize: 20,color: Colors.grey),),
+                    onPressed: (){
+
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  Text('回収予定日 ：',style: TextStyle(fontSize: 20),),
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  FlatButton(
+                    child: Text("回収予定日",style: TextStyle(fontSize: 20,color: Colors.grey),),
+                    onPressed: (){
+
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 10)),
+                  Text("メモ ：",style: TextStyle(fontSize: 20,),),
+                  Flexible(
+                    child: TextFormField(
+                      controller: _memoTextController,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 50),
+              ),
+              FlatButton(
+                child: Text("キャンセル",style: TextStyle(fontSize: 20,),),
+                onPressed: (){
+                  Navigator.of(context).pop(null);
+                },
+              ),
             ],
           ),
         ),
@@ -78,3 +146,4 @@ class CreateBill extends StatelessWidget {
     );
   }
 }
+
