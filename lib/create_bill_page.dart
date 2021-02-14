@@ -124,7 +124,9 @@ class CreateBill extends StatelessWidget {
                   Padding(padding: EdgeInsets.only(left: 10)),
                   Text("メモ ：",style: TextStyle(fontSize: 20,),),
                   Flexible(
-                    child: TextFormField(
+                    child: TextField(
+                      decoration: InputDecoration(
+                          hintText: "請求内容等…"),
                       controller: _memoTextController,
                     ),
                   ),

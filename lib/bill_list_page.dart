@@ -2,6 +2,7 @@ import 'package:bill_app/create_bill_page.dart';
 import 'package:bill_app/bill_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class BillList extends StatelessWidget {
   @override
@@ -16,12 +17,25 @@ class BillList extends StatelessWidget {
                   padding: EdgeInsets.all(3),
                   child: ListTile(
                     tileColor: Colors.white,
-                    onLongPress: (){
+                    onLongPress: () {
                       model.removeBill(e);
                     },
-                    leading: Text('￥' + e.money.toString(),style: TextStyle(fontSize: 30,),),
+                    leading: Text(
+                      '￥' + e.money.toString(),
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
                     title: Text(e.person),
-                    subtitle: Text('支払予定 ' + e.createdDay.toString()),
+                    subtitle: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("memo"),
+                          Text('支払予定 ' + DateConverterToString(e.createdDay)),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               )
@@ -43,7 +57,7 @@ class BillList extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => CreateBill()),
                 );
-                if(newBill==null)return;
+                if (newBill == null) return;
                 model.addBill(newBill);
               },
               tooltip: 'Increment',
@@ -54,4 +68,9 @@ class BillList extends StatelessWidget {
       ),
     );
   }
+}
+
+String DateConverterToString(DateTime date){
+  DateFormat outputFormat = DateFormat('yyyy-MM-dd');
+  return outputFormat.format(date);
 }

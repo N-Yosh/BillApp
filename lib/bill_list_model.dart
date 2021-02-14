@@ -13,4 +13,6 @@ class BillListModel extends ChangeNotifier {
     bills.remove(targetBill);
     notifyListeners();
   }
+
+  
 }
