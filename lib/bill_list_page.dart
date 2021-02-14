@@ -1,4 +1,4 @@
-import 'package:bill_app/create_bill.dart';
+import 'package:bill_app/create_bill_page.dart';
 import 'package:bill_app/bill_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
