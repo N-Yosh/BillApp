@@ -1,11 +1,14 @@
-import 'package:bill_app/home_model.dart';
+import 'package:bill_app/bill_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import 'bill.dart';
 
 class CreateBill extends StatelessWidget {
+  final _personTextController = TextEditingController();
+  final _moneyTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +31,7 @@ class CreateBill extends StatelessWidget {
                   ),
                   Flexible(
                     child: TextFormField(
+                      controller: _personTextController,
                       decoration: InputDecoration(labelText: '請求相手'),
                     ),
                   ),
@@ -41,7 +45,11 @@ class CreateBill extends StatelessWidget {
                   ),
                   Flexible(
                     child: TextFormField(
+                      controller: _moneyTextController,
                       decoration: InputDecoration(labelText: '請求金額'),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                     ),
                   ),
                 ],
@@ -49,9 +57,20 @@ class CreateBill extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 20),
               ),
-              FloatingActionButton(child: Text('Create'), onPressed: () {
-                var newBill=new Bill();
-              }),
+              FloatingActionButton(
+                child: Text('Submit'),
+                onPressed: () {
+                  var personText = _personTextController.text;
+                  var moneyText = _moneyTextController.text;
+                  if (personText == "" || moneyText == "") {
+                    //メッセージホップアップ
+                    return;
+                  }
+                  //作成した請求書を渡す
+                  var newBill = new Bill(personText, int.parse(moneyText));
+                  Navigator.of(context).pop(newBill);
+                },
+              ),
             ],
           ),
         ),

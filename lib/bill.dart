@@ -8,7 +8,7 @@ class Bill {
 
   //変数
   String person;
-  double money;
+  int money;
   DateTime createdDay;
 
   DateTime occurrenceDay;
