@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'bill.dart';
 import 'package:intl/intl.dart';
 
-class BillListModel extends ChangeNotifier {
-  List<Bill> bills = [];
+class CreateBillModel extends ChangeNotifier {
 
-  void addBill(Bill newBill) {
-    bills.add(newBill);
+  void writeOccurrenceDay(){
     notifyListeners();
   }
 
-  void removeBill(Bill targetBill){
-    bills.remove(targetBill);
+  void writePaymentDay(){
     notifyListeners();
   }
 

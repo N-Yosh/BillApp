@@ -32,7 +32,7 @@ class BillList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("memo"),
-                          Text('支払予定 ' + DateConverterToString(e.createdDay)),
+                          Text('支払予定 ' + model.dateConverterToString(e.createdDay)),
                         ],
                       ),
                     ),
@@ -68,9 +68,4 @@ class BillList extends StatelessWidget {
       ),
     );
   }
-}
-
-String DateConverterToString(DateTime date){
-  DateFormat outputFormat = DateFormat('yyyy-MM-dd');
-  return outputFormat.format(date);
 }
